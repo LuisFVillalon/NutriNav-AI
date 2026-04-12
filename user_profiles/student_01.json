@@ -1,0 +1,31 @@
+{
+  "user_id": "student_01",
+  "biometrics": {
+    "age": 28,
+    "weight_kg": 91,
+    "height_cm": 180,
+    "gender": "male",
+    "activity_level": 1.55
+  },
+  "goals": {
+    "target": "lose_weight",
+    "weekly_rate_kg": 0.5
+  },
+  "preferences": {
+    "dietary_framework": "high protein",
+    "liked_foods": [
+      "chicken",
+      "red meat",
+      "mushroom",
+      "beans",
+      "spinach",
+      "eggs"
+    ],
+    "disliked_foods": [
+      "pork"
+    ],
+    "allergies": [
+      "none"
+    ]
+  }
+}

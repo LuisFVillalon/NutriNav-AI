@@ -1,0 +1,28 @@
+{
+  "user_id": "student_03",
+  "biometrics": {
+    "age": 17,
+    "weight_kg": 60,
+    "height_cm": 185,
+    "gender": "male",
+    "activity_level": 1.2
+  },
+  "goals": {
+    "target": "maintain_weight",
+    "weekly_rate_kg": 0
+  },
+  "preferences": {
+    "dietary_framework": "keto",
+    "liked_foods": [
+      "chicken",
+      "steak",
+      "fish"
+    ],
+    "disliked_foods": [
+      "sweets"
+    ],
+    "allergies": [
+      "tomatoes"
+    ]
+  }
+}

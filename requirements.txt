@@ -1,0 +1,18 @@
+# ── LLM & AI ──────────────────────────────────────────────────────────────────
+# Claude claude-opus-4-6 powers the agentic loop in main.py (tool calling + streaming)
+anthropic>=0.40.0
+# OpenAI retained for the original agentic_orchestrator.py and VisionaryAgent
+openai>=1.30.0
+
+# ── HTTP & Environment ────────────────────────────────────────────────────────
+requests>=2.31.0
+python-dotenv>=1.0.0
+
+# ── Image handling (Visionary Agent uploads) ──────────────────────────────────
+Pillow>=10.0.0
+
+# ── Data validation ───────────────────────────────────────────────────────────
+pydantic>=2.0.0
+
+# ── Terminal output (test runner colours) ─────────────────────────────────────
+colorama>=0.4.6

@@ -1,0 +1,27 @@
+{
+  "user_id": "student_02",
+  "biometrics": {
+    "age": 17,
+    "weight_kg": 85,
+    "height_cm": 178,
+    "gender": "male",
+    "activity_level": 1.375
+  },
+  "goals": {
+    "target": "lose_weight",
+    "weekly_rate_kg": 0.5
+  },
+  "preferences": {
+    "dietary_framework": "high protein",
+    "liked_foods": [
+      "chicken",
+      "shrimp"
+    ],
+    "disliked_foods": [
+      "tomatoes"
+    ],
+    "allergies": [
+      "peanuts"
+    ]
+  }
+}
