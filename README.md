@@ -1,6 +1,6 @@
 # NutriNav-AI — Nutritional Agentic Pipeline
 
-A multi-agent Python system that produces personalised, clinically-safe 1-day meal plans. A deterministic **Nutritionist Agent** computes calorie and macro targets from biometrics; a **Chef Agent** uses GPT-4o to invent original recipes that hit those targets exactly; a self-correcting feedback loop retries the Chef up to three times if the plan fails compliance checks. A separate **Visionary Agent** can estimate calories and macros directly from a food photo.
+A multi-agent Python system that produces personalised, clinically-safe 1-day meal plans. A deterministic **Nutritionist Agent** computes calorie and macro targets from biometrics; a **Chef Agent** uses GPT-4o to invent original recipes that hit those targets exactly; a self-correcting feedback loop retries the Chef up to three times if the plan fails compliance checks.
 
 ---
 
@@ -38,7 +38,6 @@ nutrinav-ai/
 │   ├── agentic_orchestrator.py   # Orchestrator class + CLI entry point
 │   ├── nutritionist_agent.py     # Deterministic: BMR → TDEE → macros + feedback
 │   ├── chef_agent.py             # LLM: invents recipes, enforces structured output
-│   ├── visionary_agent.py        # LLM: food photo → calorie/macro estimate
 │   └── prompts.py                # ALL prompt templates — edit here only
 │
 ├── tools/
@@ -55,7 +54,6 @@ nutrinav-ai/
 ├── outputs/                      # Generated meal plans (auto-created)
 │   └── mealplan_<user_id>_<YYYYMMDD>.md
 │
-├── uploads/                      # Drop food images here for the Visionary Agent
 ├── .env                          # API keys — never commit this
 └── requirements.txt
 ```
@@ -80,8 +78,7 @@ USDA_API_KEY=...              # optional — enables NutritionistAgent.validate_
 OPENAI_MODEL=gpt-4o           # optional — defaults to gpt-4o
 ```
 
-> **Why GPT-4o?** The Chef prompt must simultaneously satisfy calorie targets, macro ratios, dietary framework rules, and allergy constraints in a single structured response. Smaller models (gpt-3.5-turbo, gpt-4o-mini) reliably fail at least one constraint. GPT-4o or Gemini 1.5 Pro is the minimum. The Visionary Agent also requires multimodal/vision capability available only in these tiers.
-
+> **Why GPT-4o?** The Chef prompt must simultaneously satisfy calorie targets, macro ratios, dietary framework rules, and allergy constraints in a single structured response. Smaller models (gpt-3.5-turbo, gpt-4o-mini) reliably fail at least one constraint. GPT-4o or Gemini 1.5 Pro is the minimum. 
 ---
 
 ## Running the Pipeline
@@ -101,14 +98,6 @@ python -m agents.agentic_orchestrator user_profiles/student_01.json --output-dir
 
 The finished plan is saved to `outputs/mealplan_<user_id>_<YYYYMMDD>.md` and printed to stdout.
 
-### Analyse a food photo
-
-```python
-from agents.agentic_orchestrator import run_vision_workflow
-
-result = run_vision_workflow("uploads/my_lunch.jpg", extra_context="restaurant portion")
-print(result)
-```
 
 ### Use the Orchestrator programmatically
 
@@ -175,7 +164,6 @@ python tools/unit_converter.py
 |-------|------|-------|--------|
 | **NutritionistAgent** | No | User profile JSON | Calorie target, macro targets (g), compliance report, Chef constraint block |
 | **ChefAgent** | Yes (GPT-4o, async) | Nutritionist constraint block + user preferences | Full 1-day meal plan in Markdown + `[JSON_START]…[JSON_END]` compliance block |
-| **VisionaryAgent** | Yes (GPT-4o vision, sync) | Base64-encoded food image | Per-item calorie and macro estimate |
 | **ComplianceChecker** | No | Calorie target or meal `daily_totals` dict | `ComplianceReport` with `status`, `issues`, and `suggestions` |
 
 ### Compliance rules enforced
